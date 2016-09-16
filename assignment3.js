@@ -83,6 +83,18 @@ window.onload = function init()
         console.debug(blue);
     }; 
 
+    // Initialize event handler (menu)
+    document.getElementById("Sp33d" ).onclick = function(event) {
+        switch( event.target.index ) {
+          case 0:
+            speed += 0.1;
+            break;
+         case 1:
+            speed -= 0.1;
+            break;
+       }
+    };
+
     // Initialize event handler (key codes)
     //r, g, and b keys make the rbg values of the square increase if capital, decrease if lowercase
    window.onkeydown = function( event ) {
