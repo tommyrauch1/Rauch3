@@ -15,9 +15,9 @@ var thetaLoc;
 var red = 1.0;
 var blue = 0.0;
 var green = 0.0;
-/*var redLoc;
+var redLoc;
 var greenLoc;
-var blueLoc;*/
+var blueLoc;
 var timesPressed = 0;
 
 var direction = true;
@@ -63,7 +63,7 @@ window.onload = function init()
     thetaLoc = gl.getUniformLocation( program, "theta" );
 
     //Sliders
-    /*redLoc = gl.getUniformLocation( program, "red" );
+    redLoc = gl.getUniformLocation( program, "red" );
     greenLoc = gl.getUniformLocation( program, "green" );
     blueLoc = gl.getUniformLocation( program, "blue" );
 
@@ -81,28 +81,31 @@ window.onload = function init()
      document.getElementById("blueSlider").onchange = function(event) {
         blue = parseFloat(event.target.value);
         console.debug(blue);
-    }; */
+    }; 
 
     // Initialize event handler (key codes)
     //r, g, and b keys make the rbg values of the square increase if capital, decrease if lowercase
-   /*window.onkeydown = function( event ) {
+   window.onkeydown = function( event ) {
        var key = String.fromCharCode(event.keyCode);
+       console.log(key);
        switch( key ) {
           case 'R': //red
             red += 0.5;
+            console.log("Increase Red", red);
             break;
           case 'r':
-            red += 0.5;
+            red -= 0.5;
             if (red <= 0.0) {
                 red = 0.0;
             }
-            console.log("Red");
+            console.log("decrease Red", red);
+
             break;
           case 'G':  //green
            green += 0.5;
             break;
           case 'g':
-           green += 0.5; 
+           green -= 0.5; 
             if (green <= 0.0) {
                 green = 0.0;
             }
@@ -112,14 +115,14 @@ window.onload = function init()
             blue += 0.5;
             break;
           case 'b':
-            blue += 0.5;
+            blue -= 0.5;
             if (blue <= 0.0) {
                 blue = 0.0;
             }
             console.log("blue");
             break;
         }
-    }; */
+    }; 
     //c = vec4(red, blue, green, 1.0);
 
  document.getElementById("stop").onclick = function () {
@@ -139,7 +142,7 @@ window.onload = function init()
 
 function render()
 {
-    console.debug(red, green, blue);
+    //console.debug(red, green, blue);
     gl.clear( gl.COLOR_BUFFER_BIT );
    // console.debug("render");
     if (direction == true)
@@ -151,9 +154,9 @@ function render()
         theta -= speed;
     }
     gl.uniform1f(thetaLoc, theta);
-    /*gl.uniform1f(redLoc, red);
+    gl.uniform1f(redLoc, red);
     gl.uniform1f(greenLoc, green);
-    gl.uniform1f(blueLoc. blue);*/
+    gl.uniform1f(blueLoc, blue);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     window.requestAnimFrame(render);
 }
